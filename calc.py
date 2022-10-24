@@ -34,7 +34,7 @@ def calcDepth(pxDiameter):
     return (depthZ)
 
 
-def actualCoordinates(Xpx, Ypx, diameterpx, diameterpx2):
+def distanceBetweenEndPonits(Xpx, Ypx, diameterpx, diameterpx2):
     xt, yt = mirror(Xpx, Ypx)
 
     depth = calcDepth(diameterpx)
@@ -82,5 +82,5 @@ Input
 """
 
 
-T = input("Enter the time at which projectile starts : ")
+# T = input("Enter the time at which projectile starts : ")
 

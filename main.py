@@ -1,4 +1,6 @@
 from collections import deque
+
+
 from imutils.video import VideoStream
 import numpy as np
 import cv2
@@ -25,19 +27,30 @@ else:
 time.sleep(2.0)
 
 
+counterF = 0
+
+coords = []
+
+
 while True:
+    counterF += 1
     frame = vs.read()
     frame = frame[1] if args.get("video", False) else frame
     if frame is None:
         break
 
-    fps = vs.get(cv2.CAP_PROP_FPS)  # OpenCV2 version 2 used "CV_CAP_PROP_FPS"
-    frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    duration = frame_count // fps
+    # fps = vs.get(cv2.CAP_PROP_FPS)  # OpenCV2 version 2 used "CV_CAP_PROP_FPS"
+    # frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    # duration = frame_count // fps
 
-    T = input("Enter the time at which projectile starts : ")
-    if T==duration:
-        print((int(x), int(y), (int(radius)**2)))
+    print(counterF)
+    InputFrame = input("Enter Frame at which projectile starts")
+    coords.append(int(x),int(y),int(radius)*2)
+    if counterF == InputFrame:
+        point1 = ((int(x), int(y), (int(radius)*2)))
+        z1 = (int(radius)*2)
+
+
 
 
 
@@ -87,3 +100,61 @@ else:
     vs.release()
 
 cv2.destroyAllWindows()
+
+
+
+for x, y, z in coords:
+    if (x, y == calc.mirror(point1[0], point1[1])):
+        if abs(z-z1) <= 5:#in same plane
+            pxDist = abs(x-point1[0])
+            actualDist = (pxDist * calc.ballDiameter) / z1  # Use this distance for calculation of projectile
+        else:#in different plane
+            actualDist = calc.distanceBetweenEndPonits(point1[0], point1[1], point1[2], z)    # Use this distance for calculation of projectile
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
