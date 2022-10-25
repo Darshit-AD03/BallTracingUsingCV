@@ -29,8 +29,7 @@ def mirror(x, y):
 
 def calcDepth(pxDiameter):
     x = pxDiameter
-    depthZ = -0.0053 * (pow(x, 5)) + 0.5331 * (pow(x, 4)) - 31.2349 * (pow(x, 3)) + 1063.4490 * (
-        pow(x, 2)) - 19565.6927 * (x) + 153717.6087
+    depthZ = 0.0002 * (pow(x, 4)) - 0.0444 * (pow(x, 3)) + 2.7465 * (pow(x, 2)) - 75.9401 * (x) + 917.0892
     return (depthZ)
 
 

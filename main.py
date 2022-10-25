@@ -11,7 +11,7 @@ import calc
 
 
 ap = argparse.ArgumentParser()
-ap.add_argument("-v", "--video", help="Path to the (optional) video file")
+ap.add_argument("-v", "--video", default='aaaa.mp4', help="Path to the (optional) video file")
 ap.add_argument("-b", "--buffer", default=64, type=int, help="max buffer size")
 args = vars(ap.parse_args())
 
@@ -31,7 +31,9 @@ counterF = 0
 
 coords = []
 
+time1 = None
 
+InputFrame = input("Enter Frame at which projectile starts")
 while True:
     counterF += 1
     frame = vs.read()
@@ -39,16 +41,13 @@ while True:
     if frame is None:
         break
 
-    # fps = vs.get(cv2.CAP_PROP_FPS)  # OpenCV2 version 2 used "CV_CAP_PROP_FPS"
-    # frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    # duration = frame_count // fps
+    fps = vs.get(cv2.CAP_PROP_FPS)  # OpenCV2 version 2 used "CV_CAP_PROP_FPS"
 
-    print(counterF)
-    InputFrame = input("Enter Frame at which projectile starts")
-    coords.append(int(x),int(y),int(radius)*2)
-    if counterF == InputFrame:
-        point1 = ((int(x), int(y), (int(radius)*2)))
-        z1 = (int(radius)*2)
+
+    # print(counterF)
+
+
+
 
 
 
@@ -76,6 +75,8 @@ while True:
 
         if radius > 10:
             cv2.circle(frame, (int(x), int(y)), int(radius), (0, 255, 255), 2)
+            coords.append((int(x), int(y), int(radius) * 2, counterF))
+
             # print((int(x), int(y), (int(radius)**2)))
             cv2.circle(frame, center, 5, (0, 0, 255), -1)
 
@@ -103,58 +104,24 @@ cv2.destroyAllWindows()
 
 
 
-for x, y, z in coords:
+for x, y, z, f in coords:
+
+    point1 = coords[0]
+
     if (x, y == calc.mirror(point1[0], point1[1])):
-        if abs(z-z1) <= 5:#in same plane
+        z2 = z
+        # print(point1[2]-z2)
+        if abs(point1[2]-z2) <= 50:#in same plane
             pxDist = abs(x-point1[0])
-            actualDist = (pxDist * calc.ballDiameter) / z1  # Use this distance for calculation of projectile
+            print(pxDist)
+            actualDist = (pxDist * calc.ballDiameter) / point1[2]  # Use this distance for calculation of projectile
+            frame2 = f
         else:#in different plane
             actualDist = calc.distanceBetweenEndPonits(point1[0], point1[1], point1[2], z)    # Use this distance for calculation of projectile
+            frame2 = f
 
 
+TimeOfProjectile = (frame2 - int(InputFrame))/fps
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print(TimeOfProjectile, actualDist)
+print(point1)
