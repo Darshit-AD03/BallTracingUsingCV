@@ -113,7 +113,7 @@ for x, y, z, f in coords:
         # print(point1[2]-z2)
         if abs(point1[2]-z2) <= 50:#in same plane
             pxDist = abs(x-point1[0])
-            print(pxDist)
+            # print(pxDist)
             actualDist = (pxDist * calc.ballDiameter) / point1[2]  # Use this distance for calculation of projectile
             frame2 = f
         else:#in different plane
@@ -124,4 +124,26 @@ for x, y, z, f in coords:
 TimeOfProjectile = (frame2 - int(InputFrame))/fps
 
 print(TimeOfProjectile, actualDist)
-print(point1)
+# print(point1)
+
+
+import calc
+import matplotlib.pyplot as plt
+
+T = 1.61
+
+
+datapointsx = []
+datapointsy = []
+Time = []
+
+n, V = calc.get_val(actualDist, TimeOfProjectile)
+
+for t in range(0, 10):
+    Vx, Vy, dx, dy = calc.get_v_d_comp(n,V,t/10)
+    Time.append(t/10)
+    datapointsx.append(dx)
+    datapointsy.append(dy)
+print(Time[-1])
+plt.scatter(datapointsx, datapointsy)
+plt.show()
