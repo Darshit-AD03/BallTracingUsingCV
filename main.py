@@ -1,3 +1,4 @@
+import math
 from collections import deque
 
 
@@ -8,10 +9,11 @@ import argparse
 import time
 import imutils
 import calc
+import matplotlib.pyplot as plt
 
 
 ap = argparse.ArgumentParser()
-ap.add_argument("-v", "--video", default='aaaa.mp4', help="Path to the (optional) video file")
+ap.add_argument("-v", "--video", default='aaa.mp4', help="Path to the (optional) video file")
 ap.add_argument("-b", "--buffer", default=64, type=int, help="max buffer size")
 args = vars(ap.parse_args())
 
@@ -41,8 +43,7 @@ while True:
     if frame is None:
         break
 
-    fps = vs.get(cv2.CAP_PROP_FPS)  # OpenCV2 version 2 used "CV_CAP_PROP_FPS"
-
+    fps = vs.get(cv2.CAP_PROP_FPS)
 
     # print(counterF)
 
@@ -124,13 +125,13 @@ for x, y, z, f in coords:
 TimeOfProjectile = (frame2 - int(InputFrame))/fps
 
 print(TimeOfProjectile, actualDist)
+TimeOfProjectile2 = float("{:.2f}".format(TimeOfProjectile))
 # print(point1)
 
 
-import calc
-import matplotlib.pyplot as plt
 
-T = 1.61
+
+# T = 1.61
 
 
 datapointsx = []
@@ -138,12 +139,38 @@ datapointsy = []
 Time = []
 
 n, V = calc.get_val(actualDist, TimeOfProjectile)
+n=(n%1.5708)
+print(n,V)
+g = 980
+actualdist2f = float("{:.2f}".format(actualDist))
+print(actualdist2f)
+for distX in range(0, int(actualdist2f*100)):
+    xdist = distX/100
+    ydist = (math.tan(n)*(distX/100) - ((g * (distX/100) * (distX/100) )/ (2*pow((V*math.cos(n)),2))))
+    datapointsx.append(xdist)
+    datapointsy.append(ydist/100)
+    distX += 100
 
-for t in range(0, 10):
-    Vx, Vy, dx, dy = calc.get_v_d_comp(n,V,t/10)
-    Time.append(t/10)
-    datapointsx.append(dx)
-    datapointsy.append(dy)
-print(Time[-1])
+
+
+
+
+# for t in range(0, int((TimeOfProjectile2)*100)):
+#     Vx, Vy, dx, dy = calc.get_v_d_comp(n, V, t/100)
+#     datapointsx.append(dx)
+#     datapointsy.append(dy)
+#     print(dx,dy)
+#     t = t/100
+#     Time.append(t)
+# print(Time[-1])
+
+
+
+# for t in range(0, 100):
+#     Vx, Vy, dx, dy = calc.get_v_d_comp(n,V,t/100)
+#     Time.append(t/100)
+#     datapointsx.append(dx)
+#     datapointsy.append(dy)
+# print(Time[-1])
 plt.scatter(datapointsx, datapointsy)
 plt.show()

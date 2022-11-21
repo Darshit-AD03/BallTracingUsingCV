@@ -50,7 +50,7 @@ def distanceBetweenEndPonits(Xpx, Ypx, diameterpx, diameterpx2):
     return (distanceBetweenEndPonits)
 
 
-g = 9.80
+g = 980
 
 
 def get_val(R, T):
@@ -62,10 +62,10 @@ def get_val(R, T):
 
 def get_v_d_comp(n, V, t):
     Vx = V * (math.cos(n))
-    Vy = V * (math.sin(n)) - g * t
+    Vy = V * (math.sin(n)) - (g * t)
 
-    dx = Vx * t
-    dy = Vy * t
+    dx = V * (math.cos(n)) * t
+    dy = V * (math.sin(n))*t - (g * t * t)
 
     return (Vx, Vy, dx, dy)
 
