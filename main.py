@@ -1,7 +1,5 @@
 import math
 from collections import deque
-
-
 from imutils.video import VideoStream
 import numpy as np
 import cv2
@@ -148,7 +146,7 @@ for distX in range(0, int(actualdist2f*100)):
     xdist = distX/100
     ydist = (math.tan(n)*(distX/100) - ((g * (distX/100) * (distX/100) )/ (2*pow((V*math.cos(n)),2))))
     datapointsx.append(xdist)
-    datapointsy.append(ydist/100)
+    datapointsy.append(ydist)
     distX += 100
 
 

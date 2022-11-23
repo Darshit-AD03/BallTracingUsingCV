@@ -54,6 +54,7 @@ g = 980
 
 
 def get_val(R, T):
+    T=0.2
     n = math.atan(T * T * g / (2 * R))
     V = T * g / (2 * math.sin(n))
 

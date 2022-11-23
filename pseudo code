@@ -1,0 +1,49 @@
+Define Video Capture
+if video not Passed:
+    start Camera
+
+Input: Frame at which projectile starts
+
+
+Loop through Frames(Video/Camera):
+
+    If Frame not Found:
+        break
+
+    Define FPS
+
+    resize Frame
+
+    Make Frame Blurred
+
+    convert to HSV
+
+    Apply more filters to make detection easier
+
+    Find Green Circles
+
+    Record the coordinates of circle in each frame
+
+    calculate diameter of ball
+
+    calculate horizontal pixel distance between initial and final position of ball
+
+    actual distance = (Actual Diameter/Pixel diameter of ball)*Pixel Distance
+
+
+
+
+
+
+
+time of projectile = Frames between start and end of projectile/FPS
+
+// Now we got Range of Projectile and Time
+// so we can find initial angle of projectile and initial velocity of projectile and define the equation of projectile based on that
+// Refer Mathematical Equations Derived from general equation of projectile
+
+
+
+
+
+Loop through equation of Projectile and Plot X / Y component of Projectile
