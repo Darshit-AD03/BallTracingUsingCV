@@ -1,5 +1,6 @@
-Integrete functions in calc.py in matplotlib to show graph from distance and time calculated using main.py
-Remove unnecessary code for trails and optimize the code. 
-Make gui for whole process using kivy 
-Improve detection accuracy and efficiency
-Over
+code for non parallel positions of ball in x y and z directions
+- dd - unity simulation - 3 videos export with their coordinates and distance from camera for each time interval - 0.01 s 
+1st video for parallel to image plane 
+2nd video for non parallel 60 d as initial angle 
+3rd video for non parallel 45 d as initial angle 
+all for same speed
