@@ -6,12 +6,13 @@
 create planes
 """
 
+  
 """
 create function that returns distance
 """
 
 """
-for each plane find center distance array
+for each plane find center distance and store in an array
 """
 
 
