@@ -1,25 +1,26 @@
-"""
-25?
-"""
-
-"""
-create planes
-"""
-
-  
-"""
-create function that returns distance
-"""
-
-"""
-for each plane find center distance and store in an array
-"""
+import math
+import pandas as pd
 
 
-"""
-for each plane find distances from camera as we increase distance from center of that plane
-"""
+df = pd.DataFrame()
 
-"""
-when matching for each points in projectile just take the closest value mapped for x and y of image coordinates and D of real coordinates
-"""
+max_range = 100  # cm
+
+plane = []
+coordinates = (0, 0)  # just for reference
+
+for x in range(max_range * 1000):
+
+    coordinates = (0, 0)  # just for reference
+
+    distance_from_camera_plane = x / 1000  # this distance is in cm
+    distance_from_camera_to_ball = 0
+
+    # here add function that takes frame as input and return coordinates of ball in that frame(2d coordinates) and
+    # distance of ball from camera
+
+    angle_between_two_lines = math.acos(distance_from_camera_plane / distance_from_camera_to_ball)
+
+    plane.append([coordinates, distance_from_camera_plane, distance_from_camera_to_ball])
+
+
